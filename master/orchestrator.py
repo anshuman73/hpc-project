@@ -20,8 +20,8 @@ def accept_ping():
         return f"Ping OK from {data['node_name']}", 200
 
 
-@app.route('/start', methods=['GET'])
-def work():
+@app.route('/start', methods=['POST'])
+def queue_work():
     for ep in [2,5,10,15,20]:
         for bs in [8,16,32,64,128]:
             for lr in [0.01,0.001,0.0001,0.00001]:
@@ -36,9 +36,12 @@ def work():
                     }
                 }
                 queue.append(data)
-    print(len(queue))
-    return 'Work queued'
+    return f'Work queued. {len(queue)} combinations created'
 
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 @app.route('/post_results', methods=['POST'])
 def accept_result():
@@ -49,7 +52,7 @@ def accept_result():
 
 @app.route('/results', methods=['GET'])
 def get_results():
-    return render_template('results.html', results=results.extend(queue))
+    return render_template('results.html', results=results + queue)
 
 
 @app.route('/nodes', methods=['GET'])
