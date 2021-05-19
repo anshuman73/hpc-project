@@ -1,0 +1,16 @@
+<table style="width:100%"></table>
+    <tr>
+      <th>Learning Rate</th>
+      <th>Batch Size</th>
+      <th>Epochs</th>
+      <th>Accuracy</th>
+    </tr>
+    {% for result in results %}
+    <tr>
+      <td>{{ result['configuration']['learning_rate'] }}</td>
+      <td>{{ result['configuration']['batch_size'] }}</td>
+      <td>{{ result['configuration']['epoch'] }}</td>
+      <td>{{ result['results']['accuracy'][-1] }}</td>
+    </tr>
+    {% endfor %}
+  </table>

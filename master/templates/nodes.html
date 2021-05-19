@@ -1,0 +1,16 @@
+<table style="width:100%"></table>
+    <tr>
+      <th>Node Name</th>
+      <th>Node Alive Since</th>
+      <th>Last Ping</th>
+      <th>Computing?</th>
+    </tr>
+    {% for node in nodes %}
+    <tr>
+      <td>{{ node[0] }}</td>
+      <td>{{ node[1] }}</td>
+      <td>{{ node[2] }}</td>
+      <td>{{ node[3] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
