@@ -1,9 +1,12 @@
-<table style="width:100%"></table>
+<table style="width:100%">
     <tr>
       <th>Learning Rate</th>
       <th>Batch Size</th>
       <th>Epochs</th>
       <th>Accuracy</th>
+      <th>Validation Accuracy</th>
+      <th>Loss</th>
+      <th>Validation Loss</th>
     </tr>
     {% for result in results %}
     <tr>
@@ -11,6 +14,9 @@
       <td>{{ result['configuration']['batch_size'] }}</td>
       <td>{{ result['configuration']['epoch'] }}</td>
       <td>{{ result['results']['accuracy'][-1] }}</td>
+      <td>{{ result['results']['val_accuracy'][-1] }}</td>
+      <td>{{ result['results']['loss'][-1] }}</td>
+      <td>{{ result['results']['val_loss'][-1] }}</td>
     </tr>
     {% endfor %}
   </table>

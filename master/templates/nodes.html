@@ -1,4 +1,4 @@
-<table style="width:100%"></table>
+<table style="width:100%">
     <tr>
       <th>Node Name</th>
       <th>Node Alive Since</th>
@@ -7,10 +7,10 @@
     </tr>
     {% for node in nodes %}
     <tr>
-      <td>{{ node[0] }}</td>
-      <td>{{ node[1] }}</td>
-      <td>{{ node[2] }}</td>
-      <td>{{ node[3] }}</td>
+      <td>{{ nodes[node][0] }}</td>
+      <td>{{ nodes[node][1] }}</td>
+      <td>{{ nodes[node][2] }}</td>
+      <td>{{ nodes[node][3] }}</td>
     </tr>
     {% endfor %}
   </table>
