@@ -42,20 +42,19 @@ def create_model(lr):
 while True:
     files = os.listdir()
     if 'settings.json' in files:
-        os.environ['COMPUTING'] = '1'
         model_config = json.loads(open('settings.json', 'r').read())
-        print('Parsed job:')
+        print('Recieved New job-')
         learning_rate = model_config['configuration']['learning_rate']
         batch_size = model_config['configuration']['batch_size']
         epochs = model_config['configuration']['epoch']
-        print(learning_rate, batch_size, epochs)
+        print('Parsed job:', learning_rate, batch_size, epochs)
         print('Starting training...')
         model = create_model(learning_rate)
-        history = model.fit(trainX, trainY, batch_size=batch_size, epochs=epochs, validation_split=0.37, verbose=1)
+        history = model.fit(trainX, trainY, batch_size=batch_size, epochs=epochs, validation_split=0.37, verbose=2)
         model_config['results'] = history.history
         requests.post(BASE_URL+'/post_results', json=model_config)
         os.remove('settings.json')
-        os.environ['COMPUTING'] = '0'
+        print('Completed training round\n\n\n\n')
     else:
         pass
     time.sleep(0.5)

@@ -19,7 +19,7 @@ birth_time = time.time()
 print(f'Node activated. Unique Node name: {node_name}')
 
 while True:
-    COMPUTING = os.environ.get('COMPUTING', COMPUTING)
+    COMPUTING = bool('settings.json' in os.listdir())
     data = {'node_name': node_name,
             'is_computing': COMPUTING, 'alive_since': birth_time}
     try:

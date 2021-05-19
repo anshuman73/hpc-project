@@ -1,16 +1,45 @@
-<table style="width:100%">
-    <tr>
-      <th>Node Name</th>
-      <th>Node Alive Since</th>
-      <th>Last Ping</th>
-      <th>Computing?</th>
-    </tr>
-    {% for node in nodes %}
-    <tr>
-      <td>{{ nodes[node][0] }}</td>
-      <td>{{ nodes[node][1] }}</td>
-      <td>{{ nodes[node][2] }}</td>
-      <td>{{ nodes[node][3] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Connected Nodes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+  <section>
+  <h1>All connected Nodes ({{ nodes|length }})</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Node Name</th>
+          <th>Node Alive Since</th>
+          <th>Last Ping</th>
+          <th>Computing?</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        {% for node in nodes %}
+        <tr>
+          <td>{{ nodes[node][0] }}</td>
+          <td>{{ nodes[node][1] }}</td>
+          <td>{{ nodes[node][2] }}</td>
+          <td>{{ nodes[node][3] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="static/js/index.js"></script>
+
+</body>
+</html>
