@@ -40,13 +40,15 @@
         </tr>
         {% endfor %}
         {% for item in queue %}
+        <tr>
         <td>{{ item['configuration']['learning_rate'] }}</td>
         <td>{{ item['configuration']['batch_size'] }}</td>
         <td>{{ item['configuration']['epoch'] }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
         {% endfor %}
       </tbody>
     </table>
