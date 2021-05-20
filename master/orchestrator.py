@@ -57,7 +57,7 @@ def accept_result():
 
 @app.route('/results', methods=['GET'])
 def get_results():
-    return render_template('results.html', processed = len(results), results=results, queue=queue)
+    return render_template('results.html', processed=len(results), results=results, queue=queue)
 
 
 @app.route('/nodes', methods=['GET'])
