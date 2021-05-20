@@ -12,7 +12,7 @@ results = []
 @app.route('/ping', methods=['POST'])
 def accept_ping():
     data = request.form
-    ip_address = request.remote_addr
+    ip_address = request.headers['X-Forwarded-For']
     nodes[data['node_name']] = [data['node_name'], time.strftime("%H:%M:%S", time.localtime(float(data['alive_since']))), time.strftime("%H:%M:%S", time.localtime()), data['is_computing'], ip_address]
     print(f"Nodes in sync: {len(nodes)}")
     if queue and not data['is_computing'] == 'True':
