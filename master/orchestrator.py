@@ -7,6 +7,7 @@ app = Flask(__name__)
 nodes = {}
 queue = []
 results = []
+pending = []
 
 
 @app.route('/ping', methods=['POST'])
@@ -16,7 +17,9 @@ def accept_ping():
     nodes[data['node_name']] = [data['node_name'], time.strftime("%H:%M:%S", time.localtime(float(data['alive_since']))), time.strftime("%H:%M:%S", time.localtime()), data['is_computing'], ip_address]
     print(f"Nodes in sync: {len(nodes)}")
     if queue and not data['is_computing'] == 'True':
-        return jsonify(queue.pop(0)), 202
+        job = queue.pop(0)
+        pending.append(job)
+        return jsonify(job), 202
     else:
         return f"Ping OK from {data['node_name']}", 200
 
@@ -51,13 +54,16 @@ def index():
 @app.route('/post_results', methods=['POST'])
 def accept_result():
     result = request.json
+    for index, pend in enumerate(pending):
+        if pend['configuration'] == result['configuration']:
+            pending.pop(index)
     results.append(result)
     return 'OK', 200
 
 
 @app.route('/results', methods=['GET'])
 def get_results():
-    return render_template('results.html', processed=len(results), results=results, queue=queue)
+    return render_template('results.html', processed=len(results), results=results, pending=pending, queue=queue)
 
 
 @app.route('/nodes', methods=['GET'])

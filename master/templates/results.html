@@ -39,6 +39,17 @@
           <td>{{ result['results']['val_loss'][-1] }}</td>
         </tr>
         {% endfor %}
+        {% for pend in pending %}
+        <tr>
+          <td>{{ pend['configuration']['learning_rate'] }}</td>
+          <td>{{ pend'configuration']['batch_size'] }}</td>
+          <td>{{ pend['configuration']['epoch'] }}</td>
+          <td>Computing</td>
+          <td>Computing</td>
+          <td>Computing</td>
+          <td>Computing</td>
+        </tr>
+        {% endfor %}
         {% for item in queue %}
         <tr>
         <td>{{ item['configuration']['learning_rate'] }}</td>
