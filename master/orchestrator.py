@@ -2,8 +2,6 @@ from flask import Flask, request, g, jsonify, render_template, redirect
 import os
 import time
 
-from tensorflow.python.keras.backend import learning_phase
-
 app = Flask(__name__)
 
 nodes = {}
