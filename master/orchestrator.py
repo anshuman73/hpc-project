@@ -41,7 +41,7 @@ def queue_work():
                     }
                 }
                 queue.append(data)
-    return redirect('get_results')
+    return redirect('results')
 
 
 @app.route('/', methods=['GET'])
