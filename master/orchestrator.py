@@ -1,6 +1,8 @@
-from flask import Flask, request, g, jsonify, render_template
+from flask import Flask, request, g, jsonify, render_template, redirect
 import os
 import time
+
+from tensorflow.python.keras.backend import learning_phase
 
 app = Flask(__name__)
 
@@ -22,9 +24,13 @@ def accept_ping():
 
 @app.route('/start', methods=['POST'])
 def queue_work():
-    for ep in [2,5,10,15,20]:
-        for bs in [8,16,32,64,128]:
-            for lr in [0.01,0.001,0.0001,0.00001]:
+    data = request.form
+    epochs = [int(x) for x in data['epochs'].split(',')]
+    batch_sizes = [int(x) for x in data['batchsize'].split(',')]
+    learning_rate = [float(x) for x in data['learningrate'].split(',')]
+    for ep in epochs:
+        for bs in batch_sizes:
+            for lr in learning_rate:
                 data={
                     "configuration":{
                         "learning_rate":lr,
@@ -36,7 +42,7 @@ def queue_work():
                     }
                 }
                 queue.append(data)
-    return f'Work queued. {len(queue)} combinations created'
+    return redirect('get_results')
 
 
 @app.route('/', methods=['GET'])
@@ -52,7 +58,7 @@ def accept_result():
 
 @app.route('/results', methods=['GET'])
 def get_results():
-    return render_template('results.html', processed = len(results), results=results + queue)
+    return render_template('results.html', processed = len(results), results=results, queue=queue)
 
 
 @app.route('/nodes', methods=['GET'])

@@ -50,7 +50,7 @@ while True:
         print('Parsed job:', learning_rate, batch_size, epochs)
         print('Starting training...')
         model = create_model(learning_rate)
-        history = model.fit(trainX, trainY, batch_size=batch_size, epochs=epochs, validation_split=0.37, verbose=2)
+        history = model.fit(trainX, trainY, batch_size=batch_size, epochs=epochs, validation_split=0.37, verbose=1)
         model_config['results'] = history.history
         requests.post(BASE_URL+'/post_results', json=model_config)
         os.remove('settings.json')
